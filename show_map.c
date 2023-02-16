@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:45:35 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 19:39:46 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:46:15 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,18 @@ void	show_map(char **map_array, t_mapcoord mapc)
 	int				width;
 	int				height;
 	int				a;
+	char			*path;
 
-	ren.path0 = "./textures/xpm/nocrosswalk.xpm";
-	ren.path1 = "./textures/xpm/wall.xpm";
-	ren.path_p = "./textures/xpm/Player_down.xpm";
-	ren.path_c = "./textures/xpm/coin.xpm";
-	ren.path_e = "./textures/xpm/car.xpm";
+	path = "./textures/xpm/nocrosswalk.xpm";
+	ren.img0 = mlx_xpm_file_to_image(ren.mlx, path, &a, &a);
+	path = "./textures/xpm/wall.xpm";
+	ren.img1 = mlx_xpm_file_to_image(ren.mlx, path, &a, &a);
+	path = "./textures/xpm/Player_down.xpm";
+	ren.imgp = mlx_xpm_file_to_image(ren.mlx, path, &a, &a);
+	path = "./textures/xpm/coin.xpm";
+	ren.imgc = mlx_xpm_file_to_image(ren.mlx, path, &a, &a);
+	path = "./textures/xpm/car.xpm";
+	ren.imge = mlx_xpm_file_to_image(ren.mlx, path, &a, &a);
 	width = mapc.colm * 128;
 	height = mapc.linem * 160;
 	ren.mlx = mlx_init();
