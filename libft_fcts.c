@@ -6,9 +6,11 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:51:40 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:52:16 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:08:24 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 int	ft_strlen(char *s)
 {

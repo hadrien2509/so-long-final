@@ -6,9 +6,11 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:45:35 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:47:15 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:39:46 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 void	ft_put_objects(t_mapcoord *mapc, t_rendering ren, char copy)
 {
@@ -20,18 +22,18 @@ void	ft_put_objects(t_mapcoord *mapc, t_rendering ren, char copy)
 	y = (mapc->y + 0.4) * 160;
 	if (copy == 'P')
 	{
-		ren.img = mlx_xpm_file_to_image(ren.mlx, ren.pathP, &a, &a);
+		ren.img = mlx_xpm_file_to_image(ren.mlx, ren.path_p, &a, &a);
 		mlx_put_image_to_window(ren.mlx, ren.win, ren.img, x, y);
 	}
 	if (copy == 'C')
 	{
-		ren.img = mlx_xpm_file_to_image(ren.mlx, ren.pathC, &a, &a);
+		ren.img = mlx_xpm_file_to_image(ren.mlx, ren.path_c, &a, &a);
 		mlx_put_image_to_window(ren.mlx, ren.win, ren.img, x, y);
 	}
 	if (copy == 'E')
 	{
 		x = (mapc->x + 0.1) * 128;
-		ren.img = mlx_xpm_file_to_image(ren.mlx, ren.pathE, &a, &a);
+		ren.img = mlx_xpm_file_to_image(ren.mlx, ren.path_e, &a, &a);
 		mlx_put_image_to_window(ren.mlx, ren.win, ren.img, x, y);
 	}
 }
@@ -64,7 +66,7 @@ void	ft_fixed_tiles(char **map_array, t_mapcoord *mapc, t_rendering ren)
 	}
 }
 
-void	ft_moving_tiles(t_mapcoord *mapc, t_rendering ren, t_vars *v, char **ar)
+void	ft_move_tiles(t_mapcoord *mapc, t_rendering ren, t_vars *v, char **ar)
 {
 	v->mapc = *mapc;
 	v->ren = ren;
@@ -87,15 +89,15 @@ void	show_map(char **map_array, t_mapcoord mapc)
 
 	ren.path0 = "./textures/xpm/nocrosswalk.xpm";
 	ren.path1 = "./textures/xpm/wall.xpm";
-	ren.pathP = "./textures/xpm/Player_down.xpm";
-	ren.pathC = "./textures/xpm/coin.xpm";
-	ren.pathE = "./textures/xpm/car.xpm";
+	ren.path_p = "./textures/xpm/Player_down.xpm";
+	ren.path_c = "./textures/xpm/coin.xpm";
+	ren.path_e = "./textures/xpm/car.xpm";
 	width = mapc.colm * 128;
 	height = mapc.linem * 160;
 	ren.mlx = mlx_init();
 	ren.img0 = mlx_xpm_file_to_image(ren.mlx, ren.path0, &a, &a);
 	ren.win = mlx_new_window(ren.mlx, width, height, "So long!");
 	ft_fixed_tiles(map_array, &mapc, ren);
-	ft_moving_tiles(&mapc, ren, &vars, map_array);
+	ft_move_tiles(&mapc, ren, &vars, map_array);
 	mlx_loop(ren.mlx);
 }

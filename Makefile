@@ -6,42 +6,36 @@
 #    By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/19 14:22:07 by hgeissle          #+#    #+#              #
-#    Updated: 2022/11/23 18:55:19 by hgeissle         ###   ########.fr        #
+#    Updated: 2023/02/16 18:00:34 by hgeissle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long.out
 
-SRC = mlx3.c
+SRC = parsing.c check_map.c pathfinding.c show_map.c game.c text_box_bonus.c main.c
 
-BONUS = 
+SRC_LIBFT = libft_fcts.c get_next_line_bonus.c get_next_line_utils_bonus.c ft_printf.c ft_printf_tools.c
 
 FLAGS = -Wall -Wextra -Werror
 INCLUDE = -lmlx -framework OpenGL -framework AppKit
 AR = ar rcs
 RM = rm -f
 OBJS = $(SRC:.c=.o)
-OBJS_BONUS = $(BONUS:.c=.o)
-
+OBJS_LIBFT = $(SRC_LIBFT:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	gcc $(FLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
+$(NAME): $(OBJS) $(OBJS_LIBFT)
+	gcc $(FLAGS) $(OBJS) $(OBJS_LIBFT) $(INCLUDE) -o $(NAME)
 
-bonus: ${OBJS_BONUS}
-		$(AR) ${NAME} ${OBJS_BONUS}
+bonus: all
 
 clean:
-		${RM} ${OBJS} ${OBJS_BONUS}
+		$(RM) $(OBJS) $(OBJS_LIBFT)
 
 fclean: clean
-		${RM} ${NAME}
+		$(RM) $(NAME)
 
-re: fclean ${NAME}
+re: fclean all
 
-reall : fclean all
-
-rebonus : fclean bonus
-
-.PHONY: all bonus clean fclean re reall rebonus
+.PHONY: all bonus clean fclean re

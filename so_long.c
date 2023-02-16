@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:11:15 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/15 20:30:50 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:55:54 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**ft_arraydup(char **map_array, int linem, int colm)
 	char	**map_array_copy;
 
 	i = 0;
-	map_array_copy = malloc(sizeof(char*) * linem);
+	map_array_copy = malloc(sizeof(char *) * linem);
 	if (!map_array_copy)
 		return (NULL);
 	while (i < linem)
@@ -198,6 +198,7 @@ int	ft_file_to_lst(int fd, t_mapcoord *mapc, t_map **map)
 		if (!new)
 			return (-1);
 		nbr_of_columns = ft_strlen(new->line);
+		printf("%d and %d\n", mapc->colm, nbr_of_columns);
 		if (mapc->colm != nbr_of_columns && new->line)
 		{
 			printf("Error. The map must be rectangular\n");

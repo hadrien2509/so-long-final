@@ -6,9 +6,11 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:49:49 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:50:31 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:52:32 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 int	ft_check_map_size(t_mapcoord *mapc)
 {
@@ -66,6 +68,7 @@ int	ft_file_to_lst(int fd, t_mapcoord *mapc, t_map **map)
 		nbr_of_columns = ft_strlen(new->line);
 		if (mapc->colm != nbr_of_columns && new->line)
 		{
+			ft_printf("%d and %d\n", mapc->colm, nbr_of_columns);
 			ft_printf("Error. The map must be rectangular\n");
 			return (-1);
 		}

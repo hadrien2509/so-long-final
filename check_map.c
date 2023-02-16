@@ -6,9 +6,11 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:36:28 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:37:22 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:30:56 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 int	ft_check_map_items(char **map_array, int x, int y, t_mapcoord *mapc)
 {
@@ -70,15 +72,15 @@ int	ft_check_map(char **map_array, t_mapcoord *mapc)
 
 void	ft_error_type(int error_type)
 {
-	if (error_type == 2)
+	if (error_type == 2 || error_type == 4)
 		ft_printf("The map must have an exit.\n");
-	if (error_type == 1)
+	if (error_type == 1 || error_type == 5)
 		ft_printf("The map must have a player starting positon.\n");
 	if (error_type == 0)
 		ft_printf("The map must have a player starting positon and an exit.\n");
-	if (error_type == 4)
+	if (error_type == 7)
 		ft_printf("The map must have only 1 exit.\n");
-	if (error_type == 5)
+	if (error_type == 6)
 		ft_printf("The map must have only 1 player starting position.\n");
 	if (error_type == 9)
 		ft_printf("The map must have only 1 player position and 1 exit.\n");

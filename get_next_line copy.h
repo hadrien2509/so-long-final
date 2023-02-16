@@ -6,13 +6,9 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:25:58 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 17:45:51 by hgeissle         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:14:09 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
-#endif
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H

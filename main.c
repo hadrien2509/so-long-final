@@ -6,9 +6,11 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:33:01 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:33:07 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:23:58 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 int	main(int ac, char **av)
 {
@@ -30,6 +32,7 @@ int	main(int ac, char **av)
 		ft_error_type(fd);
 		return (-1);
 	}
-	ft_pathfinding_utils(&mapc, map_array);
+	if (ft_pathfinding_utils(&mapc, map_array) == -1)
+		return (-1);
 	show_map(map_array, mapc);
 }

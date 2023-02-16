@@ -6,11 +6,13 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:41:53 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:42:47 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:08:41 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_text_box(t_vars *vars, char *str)
+#include "so_long.h"
+
+void	ft_text_box(t_vars *vars, char *str)
 {
 	int		x;
 	void	*mlx;
@@ -28,9 +30,9 @@ void ft_text_box(t_vars *vars, char *str)
 	mlx_string_put(mlx, vars->ren.win, (x - 1.87) * 128, 15, 0x000000, str);
 }
 
-static size_t	ft_nbrlen(int nb)
+static int	ft_nbrlen(int nb)
 {
-	size_t			count;
+	int	count;
 
 	count = 0;
 	while (nb > 0)
@@ -46,7 +48,7 @@ char	*ft_itoa(int nb)
 	char			*nbr;
 	int				i;
 
-	i = (int)ft_nbrlen(nb);
+	i = ft_nbrlen(nb);
 	nbr = malloc(sizeof(char) * (i + 7));
 	if (!nbr)
 		return (NULL);

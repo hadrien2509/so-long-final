@@ -6,9 +6,11 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:33:40 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:35:43 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:08:31 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 char	**ft_arraydup(char **map_array, t_mapcoord *mapc)
 {

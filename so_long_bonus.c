@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:11:15 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 13:58:16 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:56:57 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ int	ft_file_to_lst(int fd, t_mapcoord *mapc, t_map **map)
 		if (!new)
 			return (-1);
 		nbr_of_columns = ft_strlen(new->line);
+		printf("%d and %d\n", mapc->colm, nbr_of_columns);
 		if (mapc->colm != nbr_of_columns && new->line)
 		{
 			ft_printf("Error. The map must be rectangular\n");
