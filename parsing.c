@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:49:49 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/18 13:41:05 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:52:15 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_check_map_size(t_mapcoord *mapc)
 {
-	if (mapc->linem > 40)
+	if (mapc->linem > 9)
 	{
-		ft_printf("Error. The map must not have more than 40 lines\n");
+		ft_printf("Error. The map must not have more than 9 lines\n");
 		return (-1);
 	}
 	if (mapc->linem < 3)
@@ -57,7 +57,8 @@ int	ft_file_to_lst(int fd, t_mapcoord *mapc, t_map **map)
 	t_map	*new;
 
 	new = ft_lstnew(fd);
-	ft_check_colm(mapc, new);
+	if (ft_check_colm(mapc, new) == -1)
+		return (-1);
 	while (new->line && mapc->linem < 40)
 	{
 		ft_lstadd_back(&map, new);
@@ -68,12 +69,12 @@ int	ft_file_to_lst(int fd, t_mapcoord *mapc, t_map **map)
 		nbr_of_columns = ft_strlen(new->line);
 		if (mapc->colm != nbr_of_columns && new->line)
 		{
-			ft_printf("%d and %d\n", mapc->colm, nbr_of_columns);
 			ft_printf("Error. The map must be rectangular\n");
 			return (-1);
 		}
 	}
-	ft_check_map_size(mapc);
+	if (ft_check_map_size(mapc) == -1)
+		return (-1);
 	close(fd);
 	return (0);
 }

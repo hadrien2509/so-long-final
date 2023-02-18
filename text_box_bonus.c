@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:41:53 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/18 13:41:23 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:26:05 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ void	ft_text_box(t_vars *vars, char *str)
 	int		a;
 	char	*path;
 
-	a = 0;
 	x = vars->mapc.colm;
 	mlx = vars->ren.mlx;
-	img = vars->ren.img;
 	path = "./textures/xpm/text_box.xpm";
-	img = mlx_xpm_file_to_image(mlx, path, &a, &a);
+	vars->ren.imgtb = mlx_xpm_file_to_image(mlx, path, &a, &a);
+	img = vars->ren.imgtb;
 	mlx_put_image_to_window(mlx, vars->ren.win, img, (x - 2) * 128, 5);
 	mlx_string_put(mlx, vars->ren.win, (x - 1.87) * 128, 15, 0x000000, str);
 }

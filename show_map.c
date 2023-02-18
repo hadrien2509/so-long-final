@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:45:35 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/18 14:10:41 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:20:04 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,32 @@ void	ft_put_objects(t_mapcoord *mapc, t_rendering *ren, char copy)
 	}
 }
 
+void	ft_print_map(t_mapcoord *mapc, char **map_array)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < mapc->linem)
+	{
+		x = 0;
+		while (x < mapc->colm)
+		{
+			ft_printf("%c", map_array[y][x]);
+			x++;
+		}
+		ft_printf("\n");
+		y++;
+	}
+}
+
 void	ft_fixed_tiles(char **map_array, t_mapcoord *mapc, t_rendering *ren)
 {
 	char	copy;
 	int		x;
 	int		y;
-	int		a;
 
+	ft_create_img(ren);
 	mapc->y = 0;
 	while (mapc->y < mapc->linem)
 	{
@@ -67,21 +86,19 @@ void	ft_move_tiles(t_mapcoord *mapc, t_rendering ren, t_vars *v, char **ar)
 	v->cols = v->mapc.colm;
 	v->moves = 0;
 	v->end = 0;
+	ft_create_player_img(&v->ren);
 	ft_text_box(v, "Collect all the bags !");
 	mlx_key_hook(ren.win, key_hook, v);
 }
 
-int	show_map(char **map_array, t_mapcoord mapc)
+void	show_map(char **map_array, t_mapcoord mapc)
 {
 	t_rendering		ren;
 	t_vars			vars;
 	int				width;
 	int				height;
 
-	if (ft_create_img(&ren) == -1)
-		return (-1);
-	if (ft_create_player_img(&ren) == -1)
-		return (-1);
+	ft_print_map(&mapc, map_array);
 	width = mapc.colm * 128;
 	height = mapc.linem * 160;
 	ren.mlx = mlx_init();
@@ -89,5 +106,4 @@ int	show_map(char **map_array, t_mapcoord mapc)
 	ft_fixed_tiles(map_array, &mapc, &ren);
 	ft_move_tiles(&mapc, ren, &vars, map_array);
 	mlx_loop(ren.mlx);
-	return (0);
 }

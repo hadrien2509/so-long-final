@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:57:26 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/18 13:32:45 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:37:14 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,27 @@ void	ft_move(int keycode, t_vars *vars, int x_copy, int y_copy)
 		vars->ren.img = vars->ren.imgr;
 	}
 }
+#include <stdio.h>
+int	ft_exit_animation(t_vars *v)
+{
+	int	x;
+	int	y;
+
+	x = v->mapc.player_x * 8;
+	y = v->mapc.player_y * 160;
+	mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.img0, x, y);
+	v->mapc.player_x -= 1;
+	x = (v->mapc.player_x + 0.1) * 8;
+	y = (v->mapc.player_y + 0.4) * 160;
+	if (v->mapc.player_x >= 0)
+		mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.imge, x, y);
+	if (v->mapc.player_x == -20)
+	{
+		ft_printf("You finished the game in %d moves.\n", v->moves);
+		ft_free_img(&v->ren);
+	}
+	return (0);
+}
 
 void	ft_put_exit(t_vars *v, int x, int y)
 {
@@ -50,10 +71,15 @@ void	ft_put_exit(t_vars *v, int x, int y)
 			x -= 128;
 		}
 		x += 128;
+		v->mapc.player_x *= 16;
+		mlx_loop_hook(v->ren.mlx, ft_exit_animation, v);
 	}
-	x = x + 0.1 * 128;
-	y = y + 0.4 * 160;
-	mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.imge, x, y);
+	else
+	{
+		x = x + 0.1 * 128;
+		y = y + 0.4 * 160;
+		mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.imge, x, y);
+	}
 }
 
 void	ft_interactions(t_vars *v)
@@ -69,7 +95,6 @@ void	ft_interactions(t_vars *v)
 		{
 			v->end = 1;
 			ft_put_exit(v, v->mapc.player_x * 128, v->mapc.player_y * 160);
-			ft_printf("You finished the game in %d moves.\n", v->moves);
 		}
 		else if (v->mapc.nbr_of_coins == 1)
 			ft_text_box(v, "One bag remains");
@@ -103,6 +128,6 @@ int	key_hook(int key, t_vars *v)
 		ft_interactions(v);
 	}
 	if (key == 53)
-		ft_free_img(v);
+		ft_free_img(&v->ren);
 	return (0);
 }

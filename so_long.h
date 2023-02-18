@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:53:33 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/18 14:11:06 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:10:06 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_rendering {
 	void	*imge;
 	void	*img1;
 	void	*imgc;
+	void	*imgtb;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -98,12 +99,13 @@ int		ft_pathfinding_utils(t_mapcoord *mapc, char **map_array);
 void	ft_put_objects(t_mapcoord *mapc, t_rendering *ren, char copy);
 void	ft_fixed_tiles(char **map_array, t_mapcoord *mapc, t_rendering *ren);
 void	ft_move_tiles(t_mapcoord *mapc, t_rendering ren, t_vars *v, char **ar);
-int		show_map(char **map_array, t_mapcoord mapc);
+void	show_map(char **map_array, t_mapcoord mapc);
 void	ft_text_box(t_vars *vars, char *str);
 char	*ft_itoa(int nb);
 void	ft_count_moves(t_vars *vars);
-void	ft_free_img(t_vars *vars);
+void	ft_free_img(t_rendering *ren);
 int		ft_create_img(t_rendering *ren);
 int		ft_create_player_img(t_rendering *ren);
+void	ft_print_map(t_mapcoord *mapc, char **map_array);
 
 #endif
