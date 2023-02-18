@@ -6,7 +6,7 @@
 /*   By: hgeissle <hgeissle@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:57:26 by hgeissle          #+#    #+#             */
-/*   Updated: 2023/02/16 17:08:17 by hgeissle         ###   ########.fr       */
+/*   Updated: 2023/02/18 13:32:45 by hgeissle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,30 @@ void	ft_move(int keycode, t_vars *vars, int x_copy, int y_copy)
 	{	
 		if (vars->map_array[y_copy - 1][x_copy] != '1' && y_copy > 0)
 			vars->mapc.player_y -= 1;
-		vars->ren.path_p = "./textures/xpm/Player_up.xpm";
+		vars->ren.img = vars->ren.imgu;
 	}
 	if (keycode == 0)
 	{	
 		if (vars->map_array[y_copy][x_copy - 1] != '1' && x_copy > 0)
 			vars->mapc.player_x -= 1;
-		vars->ren.path_p = "./textures/xpm/Player_left.xpm";
+		vars->ren.img = vars->ren.imgl;
 	}
 	if (keycode == 1)
 	{
 		if (vars->map_array[y_copy + 1][x_copy] != '1' && y_copy < vars->lines)
 			vars->mapc.player_y += 1;
-		vars->ren.path_p = "./textures/xpm/Player_down.xpm";
+		vars->ren.img = vars->ren.imgd;
 	}
 	if (keycode == 2)
 	{
 		if (vars->map_array[y_copy][x_copy + 1] != '1' && x_copy < vars->cols)
 			vars->mapc.player_x += 1;
-		vars->ren.path_p = "./textures/xpm/Player_right.xpm";
+		vars->ren.img = vars->ren.imgr;
 	}
 }
 
 void	ft_put_exit(t_vars *v, int x, int y)
 {
-	int	a;
-
-	v->ren.img = mlx_xpm_file_to_image(v->ren.mlx, v->ren.path_e, &a, &a);
 	if (v->end)
 	{
 		while (x >= 0)
@@ -56,7 +53,7 @@ void	ft_put_exit(t_vars *v, int x, int y)
 	}
 	x = x + 0.1 * 128;
 	y = y + 0.4 * 160;
-	mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.img, x, y);
+	mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.imge, x, y);
 }
 
 void	ft_interactions(t_vars *v)
@@ -83,9 +80,10 @@ void	ft_interactions(t_vars *v)
 
 int	key_hook(int key, t_vars *v)
 {
-	int	a;
-	int	x;
-	int	y;
+	int		a;
+	int		x;
+	int		y;
+	void	*img;
 
 	x = v->mapc.player_x;
 	y = v->mapc.player_y;
@@ -99,13 +97,12 @@ int	key_hook(int key, t_vars *v)
 		mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.img0, x, y);
 		if (v->map_array[y / 160][x / 128] == 'E')
 			ft_put_exit(v, x, y);
-		v->ren.img = mlx_xpm_file_to_image(v->ren.mlx, v->ren.path_p, &a, &a);
 		x = (v->mapc.player_x + 0.4) * 128;
 		y = (v->mapc.player_y + 0.4) * 160;
 		mlx_put_image_to_window(v->ren.mlx, v->ren.win, v->ren.img, x, y);
 		ft_interactions(v);
 	}
 	if (key == 53)
-		exit(0);
+		ft_free_img(v);
 	return (0);
 }
